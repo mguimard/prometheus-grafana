@@ -28,3 +28,14 @@ scrape_configs:
         labels:
           app_name: my-super-app
 
+  - job_name: my-apps
+    fallback_scrape_protocol: PrometheusText0.0.4
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+         - 172.16.2.45:8282
+         - 172.16.2.45:8383
+        labels:
+          group: lab
+          app_name: static_metrics
+
