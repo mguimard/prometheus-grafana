@@ -16,4 +16,15 @@ scrape_configs:
         labels:
           provider: scaleway
           type: vm
+          # dont do this
+          #instance: whatever
+          #
+  - job_name: apache-exporters
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - 51.159.232.57:9117
+          - 51.159.237.20:9117
+        labels:
+          app_name: my-super-app
 
