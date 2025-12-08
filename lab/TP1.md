@@ -91,7 +91,7 @@ Sur les 3 machines :
 
 ```bash
 docker run \
-  --restart always
+  --restart always \
   --volume=/:/rootfs:ro \
   --volume=/var/run:/var/run:ro \
   --volume=/sys:/sys:ro \
