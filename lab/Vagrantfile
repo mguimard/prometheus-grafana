@@ -1,0 +1,80 @@
+##############################################################
+# Vagrant file for the lab                                   #
+# 3 VMS: prometheus, grafana, applications                   #
+##############################################################
+Vagrant.configure("2") do |base|      
+
+  ##############################################################
+  # Base                                                       #
+  ##############################################################
+  base.vm.box = "debian/bookworm64"
+
+  base.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = "2"
+  end
+
+  base.vm.provision "shell", inline: <<-RUN_AS_ROOT
+    apt update
+	  apt install -y nginx vim zsh curl figlet git ca-certificates gnupg lsb-release build-essential      
+	  curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+	  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    apt update
+	  apt install -y docker-ce docker-ce-cli containerd.io    
+	  usermod -aG docker vagrant    
+    chsh -s /bin/zsh vagrant
+  RUN_AS_ROOT
+  
+  base.vm.provision "shell", privileged: false, inline: <<-RUN_AS_VAGRANT
+    git clone https://github.com/robbyrussell/oh-my-zsh.git --depth 1 --single-branch ~/.oh-my-zsh
+    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc    
+    sed -i 's/_THEME=\"robbyrussell\"/_THEME=\"agnoster\"/g' .zshrc
+    sed -i 's/plugins=(git)/plugins=(git docker kubectl minikube)/g' .zshrc
+  RUN_AS_VAGRANT
+
+  ##############################################################
+  # Prometheus                                                 #
+  ##############################################################  
+  base.vm.define "prometheus" do |prometheus|
+    prometheus.vm.network "private_network", ip: "192.168.56.10"
+    prometheus.vm.hostname = "prometheus"
+
+    prometheus.vm.provision "shell", inline: <<-PROMEHTEUS
+	    figlet Prometheus > /etc/motd
+    PROMEHTEUS
+  end
+
+  ##############################################################
+  # Grafana                                                    #
+  ##############################################################
+  base.vm.define "grafana" do |grafana|
+    grafana.vm.network "private_network", ip: "192.168.56.11"
+    grafana.vm.hostname = "grafana"
+    
+    grafana.vm.provision "shell", inline: <<-GRAFANA
+	    figlet Grafana > /etc/motd
+    GRAFANA
+  end
+
+  ##############################################################
+  # Applications                                               #
+  ##############################################################
+  base.vm.define "applications" do |applications|
+    applications.vm.network "private_network", ip: "192.168.56.100"
+    applications.vm.hostname = "applications"
+    applications.vm.provider "virtualbox" do |vb|
+      vb.memory = "8192"
+      vb.cpus = "4"
+    end
+
+    applications.vm.provision "shell", inline: <<-APPLICATIONS
+	    figlet Applications > /etc/motd
+      curl -sSLO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+      install minikube-linux-amd64 /usr/local/bin/minikube
+	    rm minikube-linux-amd64
+      cp /vagrant/kubectl /usr/bin/kubectl
+	    chmod +x /usr/bin/kubectl      
+    APPLICATIONS
+  end
+end
+
