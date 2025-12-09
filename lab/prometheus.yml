@@ -47,6 +47,7 @@ scrape_configs:
           - 51.159.82.118:8081
           - 51.159.82.118:9323
           - 51.159.82.118:9999
+          - 51.159.82.118:10000
         labels:
           platform: minikube
           provider: scaleway
