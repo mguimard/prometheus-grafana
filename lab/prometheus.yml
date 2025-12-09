@@ -16,6 +16,7 @@ scrape_configs:
         labels:
           provider: scaleway
           type: vm
+          size: medium
           # dont do this
           #instance: whatever
           #
@@ -23,19 +24,17 @@ scrape_configs:
     scrape_interval: 10s
     static_configs:
       - targets:
-          - 51.159.232.57:9117
-          - 51.159.237.20:9117
+          - 51.159.232.57:9100
         labels:
           app_name: my-super-app
 
-  - job_name: my-apps
-    fallback_scrape_protocol: PrometheusText0.0.4
+  - job_name: node-exporters-2
     scrape_interval: 5s
     static_configs:
       - targets:
-         - 172.16.2.45:8282
-         - 172.16.2.45:8383
+          - 51.159.82.118:9100
         labels:
-          group: lab
-          app_name: static_metrics
+          provider: scaleway
+          type: vm
+          size: big
 
