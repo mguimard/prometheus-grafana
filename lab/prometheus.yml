@@ -10,7 +10,6 @@ storage:
 scrape_configs:
   - job_name: node-exporters
     scrape_interval: 5s
-    evaluation_interval: 5s # frequency for alert detection
     static_configs:
       - targets:
           - 51.159.232.57:9100
@@ -57,10 +56,13 @@ scrape_configs:
 
   - job_name: static-metrics
     scrape_interval: 2s
+    fallback_scrape_protocol: PrometheusText0.0.4
     static_configs:
       - targets:
           - 192.168.1.29:8282
           - 192.168.1.29:8383
         labels:
           app: static
+          app_name: static_metrics
           purpose: demo
+
