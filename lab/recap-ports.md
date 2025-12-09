@@ -12,3 +12,5 @@
     metrics:
       - 8080: http metrics
       - 8081: telemetry
+      - 9323: demon docker
+      - 9999: cadvisor
