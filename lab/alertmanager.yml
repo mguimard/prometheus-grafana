@@ -1,0 +1,6 @@
+receivers:
+  - name: my-webhook
+    webhook_configs:
+      - url: http://192.168.1.29:38629
+route:
+  receiver: 'my-webhook'
