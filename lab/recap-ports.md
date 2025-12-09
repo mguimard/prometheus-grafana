@@ -8,7 +8,7 @@
       - 9323: docker daemon (stats globales containers)
       - 9999: cadvisor (stats détaillées containers)
   - ip:
-      - 51.19.82.118
+      - 51.159.82.118
     metrics:
       - 8080: http metrics
       - 8081: telemetry

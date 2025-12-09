@@ -38,3 +38,16 @@ scrape_configs:
           type: vm
           size: big
 
+
+  - job_name: kube-metrics
+    scrape_interval: 5s
+    static_configs:
+      - targets:
+          - 51.159.82.118:8080
+          - 51.159.82.118:8081
+        labels:
+          platform: minikube
+          provider: scaleway
+          system: debian
+
+
