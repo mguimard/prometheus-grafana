@@ -66,7 +66,6 @@ scrape_configs:
   - job_name: 'node_exp_a'
     static_configs:
       - targets: ['ip:port'] # Adapter en fonction de la cible
-
 ```
 
 ### `promB/prometheus.yml` (Prometheus B — port 9091)
@@ -102,6 +101,31 @@ scrape_configs:
       match[]: ['{__name__=~".+"}']
     static_configs:
       - targets: ['ip_promB:9091']  # PromB - adapter ip
+```
+
+Démarrer les 3 prometheus
+
+```bash
+docker run \
+    --name prometheus-a \
+    --detach \
+    -p 9090:9090 \
+    -v promA/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
+
+docker run \
+    --name prometheus-b \
+    --detach \
+    -p 9091:9090 \
+    -v promB/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
+
+docker run \
+    --name prometheus-fed \
+    --detach \
+    -p 9092:9090 \
+    -v promFed/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
 ```
 
 **Remarques** :
