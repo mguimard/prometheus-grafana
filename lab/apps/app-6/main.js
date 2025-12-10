@@ -42,7 +42,7 @@ const compute = () => {
   const randomTemp = () => {
     let res = 30 + Math.random() * 20;
 
-    if (Math.random() < 0.01) {
+    if (Math.random() < 0.10) {
       res += 50;
     }
 
