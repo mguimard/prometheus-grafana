@@ -43,6 +43,12 @@
     },
     {
       "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
       "id": "timeseries",
       "name": "Time series",
       "version": ""
@@ -77,6 +83,142 @@
         "w": 24,
         "x": 0,
         "y": 0
+      },
+      "id": 22,
+      "panels": [],
+      "title": "Dynamic panels",
+      "type": "row"
+    },
+    {
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 8,
+        "x": 0,
+        "y": 1
+      },
+      "id": 20,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "$Sensor",
+        "mode": "markdown"
+      },
+      "pluginVersion": "12.3.0",
+      "title": "Value selected :",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 8,
+        "y": 1
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "{__name__=~\"app6_sensors_sensor${Sensor}_temp_degrees\"}",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{__name__}}",
+          "range": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Temperatures",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
       },
       "id": 15,
       "panels": [],
@@ -116,7 +258,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 9
       },
       "id": 12,
       "options": {
@@ -159,7 +301,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 15
       },
       "id": 5,
       "panels": [],
@@ -197,7 +339,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 1,
       "options": {
@@ -265,7 +407,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 8
+        "y": 16
       },
       "id": 2,
       "options": {
@@ -343,7 +485,7 @@
         "h": 4,
         "w": 4,
         "x": 8,
-        "y": 8
+        "y": 16
       },
       "id": 3,
       "options": {
@@ -431,7 +573,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 8
+        "y": 16
       },
       "id": 4,
       "options": {
@@ -472,7 +614,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 20
       },
       "id": 6,
       "panels": [],
@@ -531,7 +673,7 @@
         "h": 6,
         "w": 7,
         "x": 0,
-        "y": 13
+        "y": 21
       },
       "id": 7,
       "options": {
@@ -621,7 +763,7 @@
         "h": 6,
         "w": 8,
         "x": 7,
-        "y": 13
+        "y": 21
       },
       "id": 8,
       "options": {
@@ -732,7 +874,7 @@
         "h": 6,
         "w": 9,
         "x": 15,
-        "y": 13
+        "y": 21
       },
       "id": 9,
       "options": {
@@ -839,7 +981,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 27
       },
       "id": 13,
       "options": {
@@ -878,7 +1020,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 25
+        "y": 33
       },
       "id": 10,
       "panels": [],
@@ -937,7 +1079,7 @@
         "h": 6,
         "w": 7,
         "x": 0,
-        "y": 26
+        "y": 34
       },
       "id": 11,
       "options": {
@@ -985,7 +1127,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 32
+        "y": 40
       },
       "id": 14,
       "panels": [],
@@ -1024,7 +1166,7 @@
         "h": 6,
         "w": 3,
         "x": 0,
-        "y": 33
+        "y": 41
       },
       "id": 16,
       "options": {
@@ -1171,7 +1313,7 @@
         "h": 18,
         "w": 21,
         "x": 3,
-        "y": 33
+        "y": 41
       },
       "id": 19,
       "options": {
@@ -1236,7 +1378,7 @@
         "h": 6,
         "w": 3,
         "x": 0,
-        "y": 39
+        "y": 47
       },
       "id": 18,
       "options": {
@@ -1305,7 +1447,7 @@
         "h": 6,
         "w": 3,
         "x": 0,
-        "y": 45
+        "y": 53
       },
       "id": 17,
       "options": {
@@ -1348,7 +1490,27 @@
   "schemaVersion": 42,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": ".*",
+        "current": {},
+        "definition": "metrics(app6_sensors_(sensor.*)_temp_degrees)",
+        "description": "",
+        "includeAll": true,
+        "label": "Sensor",
+        "name": "Sensor",
+        "options": [],
+        "query": {
+          "qryType": 2,
+          "query": "metrics(app6_sensors_(sensor.*)_temp_degrees)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "regex": "/.*_sensor(.*)_temp_degrees/g",
+        "sort": 1,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-5m",
@@ -1371,7 +1533,7 @@
   "timezone": "browser",
   "title": "App 6",
   "uid": "advmmsv",
-  "version": 25,
+  "version": 32,
   "weekStart": "",
   "id": null
 }
