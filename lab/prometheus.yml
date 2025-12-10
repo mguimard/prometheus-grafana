@@ -66,3 +66,12 @@ scrape_configs:
           app_name: static_metrics
           purpose: demo
 
+  - job_name: app6
+    scrape_interval: 1s
+    #fallback_scrape_protocol: PrometheusText0.0.4
+    static_configs:
+      - targets:
+          - 192.168.1.29:8484
+        labels:
+          app_name: app6
+

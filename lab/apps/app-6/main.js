@@ -70,6 +70,7 @@ app.get("/", (req, res) => {
 app.get("/metrics", (req, res) => {
   data.app6_requests_total++;
   compute();
+  res.setHeader('content-type' , 'text/plain; version=0.0.4; charset=utf-8; escaping=underscores');
   res.send(metrics());
 });
 
