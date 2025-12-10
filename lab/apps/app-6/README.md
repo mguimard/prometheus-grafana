@@ -15,5 +15,5 @@ docker run -d --name app6 -p 8484:8484 app6
 Vérification de l'installation
 
 ```bash
-curl localhost:1234/metrics
+curl localhost:8484/metrics
 ```
