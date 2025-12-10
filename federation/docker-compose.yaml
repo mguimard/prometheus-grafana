@@ -1,0 +1,46 @@
+networks:
+  net:
+
+volumes:
+  prometheus_a_data:
+  prometheus_b_data:
+  prometheus_fed_data:
+
+services:
+  # Federated instances
+  prom-a:
+    image: prom/prometheus
+    ports:
+      - 19001:9090
+    networks:
+      - net
+    volumes:
+      - ./prom-a.yml:/etc/prometheus/prometheus.yml
+
+  prom-b:
+    image: prom/prometheus
+    ports:
+      - 19002:9090
+    networks:
+      - net
+    volumes:
+      - ./prom-b.yml:/etc/prometheus/prometheus.yml
+      - prometheus_b_data:/prometheus
+
+  # Federation prometheus
+  prom-fed:
+    image: prom/prometheus
+    ports:
+      - 19000:9090
+    networks:
+      - net
+    volumes:
+      - ./prom-fed.yml:/etc/prometheus/prometheus.yml
+      - prometheus_fed_data:/prometheus
+      - ./web-config-fed.yml:/etc/prometheus/web-config.yml
+      - ./cert.crt:/etc/prometheus/cert.crt
+      - ./server.key:/etc/prometheus/server.key
+      - prometheus_a_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.config.file=/etc/prometheus/web-config.yml'

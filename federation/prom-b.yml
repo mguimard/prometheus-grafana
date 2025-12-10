@@ -1,0 +1,24 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'node_exp_paris'
+    static_configs:
+      - targets: 
+        - 51.159.82.118:9100
+        labels:
+          region: paris-3
+          provider: scaleway
+          size: big
+  - job_name: app6
+    static_configs:
+      - targets:
+        - 192.168.1.29:8484
+        labels:
+          app: app6
+          client: clientA
+      - targets:
+        - 192.168.1.29:8585
+        labels:
+          app: app6
+          client: clientB
