@@ -62,8 +62,6 @@ const metrics = () => {
   return res;
 };
 
-setInterval(compute, 500);
-
 app.get("/", (req, res) => {
   data.app6_requests_total++;
   res.send("Hello World!");
